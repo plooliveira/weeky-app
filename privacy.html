@@ -1,32 +1,35 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Privacy Policy for Weeky, a weekly planner for macOS."
-    />
+    <meta name="description" content="Política de Privacidade do Weeky, um planejador semanal para macOS." data-i18n="privacy.metaDescription" data-i18n-attr="content" />
     <meta name="theme-color" content="#f6f5f0" />
     <link rel="canonical" href="https://plooliveira.github.io/week-app/privacy.html" />
     <link rel="icon" href="./assets/brand/weeky-icon.png" type="image/png" />
     <link rel="apple-touch-icon" href="./assets/brand/weeky-icon.png" />
     <link rel="stylesheet" href="./styles.css" />
-    <title>Privacy Policy — Weeky</title>
+    <title data-i18n="privacy.title">Política de Privacidade — Weeky</title>
   </head>
-  <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+  <body data-page="privacy">
+    <a class="skip-link" href="#main-content" data-i18n="common.skipToContent">Pular para o conteúdo</a>
 
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="./" aria-label="Weeky home">
+        <a class="brand" href="./" aria-label="Página inicial do Weeky" data-i18n="common.homeLabel" data-i18n-attr="aria-label">
           <img class="brand-mark" src="./assets/brand/weeky-icon.png" alt="" />
           <span>Weeky</span>
         </a>
-        <a class="back-link" href="./">
-          <span aria-hidden="true">←</span>
-          Back to home
-        </a>
+        <div class="header-actions">
+          <a class="back-link" href="./">
+            <span aria-hidden="true">←</span>
+            <span data-i18n="common.backToHome">Voltar ao início</span>
+          </a>
+          <div class="language-switcher" role="group" aria-label="Selecionar idioma" data-i18n="common.languageSelector" data-i18n-attr="aria-label">
+            <button class="language-button" type="button" data-language="pt-BR" aria-label="Português (Brasil)" title="Português (Brasil)">🇧🇷</button>
+            <button class="language-button" type="button" data-language="en" aria-label="English" title="English">🇺🇸</button>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -34,51 +37,50 @@
       <article class="container privacy-article">
         <header class="privacy-header">
           <p class="eyebrow">Weeky</p>
-          <h1>Privacy Policy</h1>
-          <p class="privacy-intro">
-            Weeky is currently in active development. This policy describes how the app
-            handles information in its current version.
+          <h1 data-i18n="privacy.heading">Política de Privacidade</h1>
+          <p class="privacy-intro" data-i18n="privacy.intro">
+            O Weeky está em desenvolvimento ativo. Esta política descreve como o app
+            lida com informações na versão atual.
           </p>
-          <p class="last-updated">Last updated: July 12, 2026</p>
+          <p class="last-updated" data-i18n="privacy.lastUpdated">Última atualização: 12 de julho de 2026</p>
         </header>
 
         <div class="privacy-content">
           <section aria-labelledby="local-data-title">
-            <h2 id="local-data-title">Your planning data stays local</h2>
-            <p>
-              Weeky stores your planning data locally on your device. Your weekly plans are
-              not sent to a Weeky server.
+            <h2 id="local-data-title" data-i18n="privacy.localTitle">Seus dados de planejamento ficam no seu dispositivo</h2>
+            <p data-i18n="privacy.localDescription">
+              O Weeky armazena seus dados de planejamento localmente no seu dispositivo.
+              Seus planos semanais não são enviados para um servidor do Weeky.
             </p>
           </section>
 
           <section aria-labelledby="analytics-title">
-            <h2 id="analytics-title">No analytics</h2>
-            <p>
-              Weeky does not currently use analytics or tracking tools inside the
-              application.
+            <h2 id="analytics-title" data-i18n="privacy.analyticsTitle">Sem análises</h2>
+            <p data-i18n="privacy.analyticsDescription">
+              O Weeky não usa ferramentas de análise ou rastreamento dentro do aplicativo.
             </p>
           </section>
 
           <section aria-labelledby="accounts-title">
-            <h2 id="accounts-title">No account required</h2>
-            <p>
-              Weeky does not currently require you to create an account or provide personal
-              information to use the application.
+            <h2 id="accounts-title" data-i18n="privacy.accountsTitle">Nenhuma conta necessária</h2>
+            <p data-i18n="privacy.accountsDescription">
+              Atualmente, o Weeky não exige que você crie uma conta ou forneça informações
+              pessoais para usar o aplicativo.
             </p>
           </section>
 
           <section aria-labelledby="changes-title">
-            <h2 id="changes-title">Changes to this policy</h2>
-            <p>
-              This policy will be updated if the way Weeky handles data changes. The latest
-              version will remain available on this page.
+            <h2 id="changes-title" data-i18n="privacy.changesTitle">Alterações nesta política</h2>
+            <p data-i18n="privacy.changesDescription">
+              Esta política será atualizada caso a forma como o Weeky lida com dados mude.
+              A versão mais recente continuará disponível nesta página.
             </p>
           </section>
         </div>
 
         <a class="button button-secondary" href="./">
           <span aria-hidden="true">←</span>
-          Return to Weeky
+          <span data-i18n="privacy.returnToWeeky">Voltar ao Weeky</span>
         </a>
       </article>
     </main>
@@ -88,5 +90,6 @@
         <p class="copyright">© <time datetime="2026">2026</time> Weeky</p>
       </div>
     </footer>
+    <script src="./i18n.js" defer></script>
   </body>
 </html>

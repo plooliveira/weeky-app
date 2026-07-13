@@ -110,6 +110,41 @@ a {
   gap: clamp(20px, 3vw, 38px);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.language-switcher {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.language-button {
+  width: 32px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  opacity: 0.48;
+  transition: background-color 160ms ease, opacity 160ms ease;
+}
+
+.language-button:hover,
+.language-button[aria-pressed="true"] {
+  background: var(--accent-soft);
+  opacity: 1;
+}
+
 .site-nav a,
 .back-link,
 .footer-links a {
@@ -826,6 +861,10 @@ h1 {
 
   .site-nav {
     gap: 16px;
+  }
+
+  .header-actions {
+    gap: 12px;
   }
 
   .site-nav a {

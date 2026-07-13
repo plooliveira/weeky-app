@@ -11,12 +11,19 @@ focused weekly planner for macOS.
 ## URLs
 
 - Website: <https://plooliveira.github.io/week-app/>
-- Releases: <https://github.com/plooliveira/week-app/releases>
+- Releases: <https://github.com/plooliveira/weeky-app/releases>
+- Latest release: <https://github.com/plooliveira/weeky-app/releases/latest>
 - Latest macOS download:
-  <https://github.com/plooliveira/week-app/releases/latest/download/Weeky.dmg>
+  <https://github.com/plooliveira/weeky-app/releases/latest/download/Weeky.dmg>
+- Latest Windows download:
+  <https://github.com/plooliveira/weeky-app/releases/latest/download/Weeky-Windows-x64-Setup.exe>
+- Latest Linux downloads:
+  <https://github.com/plooliveira/weeky-app/releases/latest/download/Weeky-Linux-x64.deb>
+  and <https://github.com/plooliveira/weeky-app/releases/latest/download/Weeky-Linux-x64.tar.gz>
 
-The download URL always points to the asset named exactly `Weeky.dmg` in the latest
-published release.
+The download URLs always point to assets from the latest published release. Keep
+the installer filenames exactly as listed above so the operating-system detection
+continues to resolve them correctly.
 
 ## Enable GitHub Pages
 
@@ -34,22 +41,24 @@ There is no build step.
 
 ## Publish a new version manually
 
-1. Generate the Weeky `.dmg` file.
-2. Rename it exactly to `Weeky.dmg`.
+1. Generate the Weeky installer files.
+2. Rename them exactly to `Weeky.dmg`, `Weeky-Windows-x64-Setup.exe`,
+   `Weeky-Linux-x64.deb`, and `Weeky-Linux-x64.tar.gz`.
 3. Open the **Releases** tab in this repository.
 4. Click **Draft a new release**.
 5. Create a tag such as `v0.1.0`.
 6. Use a title such as `Weeky v0.1.0`.
 7. Write the release notes.
-8. Attach `Weeky.dmg`.
+8. Attach the installer files for the supported platforms.
 9. Publish the release.
-10. Test the **Download for macOS** button on the website.
+10. Test the download button for macOS, Windows, Linux, and an unknown or mobile
+    platform.
 
-The `/releases/latest/download/Weeky.dmg` link resolves to the asset from the latest
-published release, as long as the file keeps the exact name `Weeky.dmg`.
+The `/releases/latest/download/<filename>` links resolve to assets from the latest
+published release, as long as each file keeps its documented name.
 
-Do not add the installer to this Git repository, create a `downloads` directory, or
-use Git LFS for releases.
+Do not add installers to this Git repository, create a `downloads` directory, or use
+Git LFS for releases.
 
 ## Run locally
 

@@ -9,6 +9,10 @@ const translations = {
       privacy: "Privacidade",
       privacyPolicy: "Política de Privacidade",
       downloadForMac: "Baixar para macOS",
+      downloadForWindows: "Baixar para Windows",
+      downloadForLinux: "Baixar para Linux",
+      viewDownloads: "Ver downloads",
+      linuxPortableDownload: "Também disponível: .tar.gz portátil",
       backToHome: "Voltar ao início",
       languageSelector: "Selecionar idioma",
     },
@@ -19,7 +23,6 @@ const translations = {
       heroTitle: "Planeje sua semana sem complicação.",
       heroDescription: "Weeky é um planejador semanal simples e focado para desktop.",
       allReleases: "Ver todas as versões",
-      downloadNote: "macOS · Download direto pelo GitHub Releases",
       demoLabel: "Demonstração do planejador semanal Weeky",
       featuresEyebrow: "Feito para manter o foco",
       featuresTitle: "Tudo o que você precisa para uma semana mais clara.",
@@ -66,6 +69,10 @@ const translations = {
       privacy: "Privacy",
       privacyPolicy: "Privacy Policy",
       downloadForMac: "Download for macOS",
+      downloadForWindows: "Download for Windows",
+      downloadForLinux: "Download for Linux",
+      viewDownloads: "View downloads",
+      linuxPortableDownload: "Also available: portable .tar.gz",
       backToHome: "Back to home",
       languageSelector: "Choose language",
     },
@@ -76,7 +83,6 @@ const translations = {
       heroTitle: "Plan your week without the clutter.",
       heroDescription: "Weeky is a simple and focused weekly planner for desktop.",
       allReleases: "View all releases",
-      downloadNote: "macOS · Direct download from GitHub Releases",
       demoLabel: "Weeky weekly planner demonstration",
       featuresEyebrow: "Designed for focus",
       featuresTitle: "Everything you need for a clearer week.",
@@ -115,6 +121,61 @@ const translations = {
   },
 };
 
+const latestReleaseUrl = "https://github.com/plooliveira/weeky-app/releases/latest";
+
+const downloadOptions = {
+  macos: {
+    href: `${latestReleaseUrl}/download/Weeky.dmg`,
+    labelKey: "common.downloadForMac",
+  },
+  windows: {
+    href: `${latestReleaseUrl}/download/Weeky-Windows-x64-Setup.exe`,
+    labelKey: "common.downloadForWindows",
+  },
+  linux: {
+    href: `${latestReleaseUrl}/download/Weeky-Linux-x64.deb`,
+    alternativeHref: `${latestReleaseUrl}/download/Weeky-Linux-x64.tar.gz`,
+    labelKey: "common.downloadForLinux",
+  },
+  unknown: {
+    href: latestReleaseUrl,
+    labelKey: "common.viewDownloads",
+  },
+};
+
+const classifyPlatform = (value) => {
+  const platform = value.toLowerCase();
+  if (platform.includes("mac")) return "macos";
+  if (platform.includes("win")) return "windows";
+  if (platform.includes("linux") || platform.includes("x11")) return "linux";
+  return "unknown";
+};
+
+const detectOperatingSystem = (browser = globalThis.navigator ?? {}) => {
+  const userAgentDataPlatform = String(browser.userAgentData?.platform ?? "");
+  const platform = String(browser.platform ?? "");
+  const userAgent = String(browser.userAgent ?? "");
+  const browserIdentity = `${userAgentDataPlatform} ${platform} ${userAgent}`.toLowerCase();
+
+  if (/android|\bios\b|iphone|ipad|ipod|cros|chrome os/.test(browserIdentity)) return "unknown";
+  if (browserIdentity.includes("mac") && browser.maxTouchPoints > 1) {
+    return "unknown";
+  }
+  if (userAgentDataPlatform) return classifyPlatform(userAgentDataPlatform);
+
+  const platformResult = classifyPlatform(platform);
+  return platformResult === "unknown" ? classifyPlatform(userAgent) : platformResult;
+};
+
+const getDownloadConfiguration = (browser = globalThis.navigator ?? {}) => {
+  const operatingSystem = detectOperatingSystem(browser);
+  return {
+    operatingSystem,
+    showLinuxAlternative: operatingSystem === "linux",
+    ...downloadOptions[operatingSystem],
+  };
+};
+
 const getValue = (language, key) =>
   key.split(".").reduce((value, segment) => value?.[segment], translations[language]);
 
@@ -122,6 +183,28 @@ const preferredLanguage = () => {
   const savedLanguage = localStorage.getItem("weeky-language");
   if (savedLanguage && translations[savedLanguage]) return savedLanguage;
   return navigator.language?.toLowerCase().startsWith("pt") ? "pt-BR" : "en";
+};
+
+const configureDownloads = (language) => {
+  const option = getDownloadConfiguration();
+
+  document.querySelectorAll("[data-download-button]").forEach((button) => {
+    button.href = option.href;
+  });
+  document.querySelectorAll("[data-download-label]").forEach((label) => {
+    label.textContent = getValue(language, option.labelKey);
+  });
+
+  const linuxDownload = document.querySelector("[data-linux-download]");
+  if (linuxDownload) {
+    linuxDownload.href = downloadOptions.linux.alternativeHref;
+    linuxDownload.hidden = !option.showLinuxAlternative;
+  }
+
+  const linuxDownloadLabel = document.querySelector("[data-linux-download-label]");
+  if (linuxDownloadLabel) {
+    linuxDownloadLabel.textContent = getValue(language, "common.linuxPortableDownload");
+  }
 };
 
 const setLanguage = (language) => {
@@ -138,11 +221,23 @@ const setLanguage = (language) => {
   document.querySelectorAll("[data-language]").forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.language === selectedLanguage));
   });
+  configureDownloads(selectedLanguage);
   localStorage.setItem("weeky-language", selectedLanguage);
 };
 
-document.querySelectorAll("[data-language]").forEach((button) => {
-  button.addEventListener("click", () => setLanguage(button.dataset.language));
-});
+if (typeof document !== "undefined") {
+  document.querySelectorAll("[data-language]").forEach((button) => {
+    button.addEventListener("click", () => setLanguage(button.dataset.language));
+  });
 
-setLanguage(preferredLanguage());
+  setLanguage(preferredLanguage());
+}
+
+if (typeof module !== "undefined") {
+  module.exports = {
+    detectOperatingSystem,
+    downloadOptions,
+    getDownloadConfiguration,
+    latestReleaseUrl,
+  };
+}

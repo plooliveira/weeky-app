@@ -1,7 +1,7 @@
 # Weeky website
 
 This is the public repository for the official Weeky website. Weeky is a simple and
-focused weekly planner for macOS.
+focused weekly planner for desktop.
 
 - The application source code lives in a separate private repository.
 - The static website is hosted with GitHub Pages.

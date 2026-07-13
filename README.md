@@ -62,28 +62,10 @@ python3 -m http.server 8080
 
 Then open <http://localhost:8080>.
 
-## Replace the media placeholders
+## Media
 
-The first version intentionally uses a styled screenshot placeholder in the hero.
-No external or temporary image is loaded.
-
-To replace it:
-
-1. Export the real application screenshot to
-   `assets/screenshots/weeky-app.png`.
-2. In `index.html`, replace the entire `<figure class="product-preview">` element
-   with an image inside a figure, for example:
-
-   ```html
-   <figure class="product-preview product-preview-image">
-     <img
-       src="./assets/screenshots/weeky-app.png"
-       alt="Weeky showing a weekly plan on macOS"
-     />
-   </figure>
-   ```
-
-3. Keep the image description accurate and concise.
+The hero uses the real application screenshot at
+`assets/screenshots/screenshot1.png`.
 
 Recommended locations for future brand and media files:
 

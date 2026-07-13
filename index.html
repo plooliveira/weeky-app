@@ -9,6 +9,8 @@
     />
     <meta name="theme-color" content="#f6f5f0" />
     <link rel="canonical" href="https://plooliveira.github.io/week-app/" />
+    <link rel="icon" href="./assets/brand/weeky-icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./assets/brand/weeky-icon.png" />
     <link rel="stylesheet" href="./styles.css" />
     <title>Weeky — Weekly planner for macOS</title>
   </head>
@@ -18,7 +20,7 @@
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="./" aria-label="Weeky home">
-          <span class="brand-mark" aria-hidden="true">W</span>
+          <img class="brand-mark" src="./assets/brand/weeky-icon.png" alt="" />
           <span>Weeky</span>
         </a>
 
@@ -62,46 +64,16 @@
             <p class="download-note">macOS · Direct download from GitHub Releases</p>
           </div>
 
-          <figure
-            class="product-preview"
-            aria-label="Placeholder for a future screenshot of the Weeky application"
-          >
-            <div class="preview-window" aria-hidden="true">
-              <div class="window-bar">
-                <div class="window-controls">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <span class="window-title">Weeky</span>
-                <span class="window-spacer"></span>
-              </div>
-
-              <div class="preview-toolbar">
-                <span class="preview-kicker">THIS WEEK</span>
-                <span class="preview-week">July 13 – 19</span>
-                <span class="preview-today">Today</span>
-              </div>
-
-              <div class="preview-calendar">
-                <div class="time-rail">
-                  <span>8</span>
-                  <span>10</span>
-                  <span>12</span>
-                  <span>14</span>
-                  <span>16</span>
-                </div>
-                <div class="day-column"><span>MON</span><i class="block block-blue"></i></div>
-                <div class="day-column"><span>TUE</span><i class="block block-sand"></i></div>
-                <div class="day-column is-today"><span>WED</span><i class="block block-dark"></i></div>
-                <div class="day-column"><span>THU</span><i class="block block-blue block-late"></i></div>
-                <div class="day-column"><span>FRI</span><i class="block block-sand block-mid"></i></div>
-              </div>
-            </div>
-            <figcaption>
-              <span>Product screenshot placeholder</span>
-              <span>Replace with <code>assets/screenshots/weeky-app.png</code></span>
-            </figcaption>
+          <figure class="product-preview product-preview-image">
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              aria-label="Weeky weekly planner demonstration"
+            >
+              <source src="./assets/videos/weeky-demo.mp4" type="video/mp4" />
+            </video>
           </figure>
         </div>
       </section>
@@ -141,19 +113,24 @@
         </div>
       </section>
 
-      <section class="status-section" aria-labelledby="status-title">
+      <section class="print-section" aria-labelledby="print-title">
         <div class="container">
-          <div class="status-card">
-            <div class="status-copy">
-              <span class="status-dot" aria-hidden="true"></span>
-              <div>
-                <p class="status-label">Current status</p>
-                <h2 id="status-title">Weeky is in active development.</h2>
-              </div>
+          <div class="print-card">
+            <div class="print-copy">
+              <p class="print-label">PRINT YOUR WEEK</p>
+              <h2 id="print-title">Your week, ready to take with you.</h2>
+              <p>
+                Print your schedule whenever you want a calmer view away from the screen.
+                Your plans and categories stay clear, even on paper.
+              </p>
             </div>
-            <p>
-              New versions are published manually through GitHub Releases as the app evolves.
-            </p>
+
+            <figure class="print-preview">
+              <img
+                src="./assets/prints/weeky-print-preview.png"
+                alt="A printable Weeky weekly schedule with time blocks and categories"
+              />
+            </figure>
           </div>
         </div>
       </section>
@@ -180,10 +157,10 @@
       <div class="container footer-inner">
         <div class="footer-brand">
           <a class="brand" href="./" aria-label="Weeky home">
-            <span class="brand-mark" aria-hidden="true">W</span>
+            <img class="brand-mark" src="./assets/brand/weeky-icon.png" alt="" />
             <span>Weeky</span>
           </a>
-          <p>A focused weekly planner for macOS.</p>
+          <p>A focused weekly planner for desktop.</p>
         </div>
 
         <div class="footer-links">

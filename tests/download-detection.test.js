@@ -6,8 +6,10 @@ const test = require("node:test");
 const {
   detectOperatingSystem,
   downloadOptions,
+  getDownloadLabel,
   getDownloadConfiguration,
   latestReleaseUrl,
+  normalizeVersion,
 } = require("../i18n.js");
 
 test("prefers userAgentData.platform when it is available", () => {
@@ -70,4 +72,18 @@ test("keeps a latest-release fallback in the static HTML", () => {
   assert.equal(indexHtml.split(fallbackHref).length - 1, 2);
   assert.match(indexHtml, /data-download-button/);
   assert.match(indexHtml, /data-linux-download\s+hidden/);
+});
+
+test("shows the current version only on direct-download labels", () => {
+  const macOS = getDownloadConfiguration({ userAgentData: { platform: "macOS" } });
+  const unknown = getDownloadConfiguration({ userAgentData: { platform: "Android" } });
+
+  assert.equal(getDownloadLabel("pt-BR", macOS, "0.1.2"), "Baixar para macOS · 0.1.2");
+  assert.equal(getDownloadLabel("en", macOS, "v0.1.2"), "Download for macOS · 0.1.2");
+  assert.equal(getDownloadLabel("pt-BR", unknown, "0.1.2"), "Ver downloads");
+});
+
+test("version.json contains a valid semantic version", () => {
+  const metadata = JSON.parse(readFileSync(join(__dirname, "..", "version.json"), "utf8"));
+  assert.equal(normalizeVersion(metadata.version), metadata.version);
 });

@@ -25,6 +25,10 @@ The download URLs always point to assets from the latest published release. Keep
 the installer filenames exactly as listed above so the operating-system detection
 continues to resolve them correctly.
 
+The primary download button reads the current version from `version.json`. Update
+that file whenever a new release is published; if it cannot be loaded, the button
+continues to work without displaying a version.
+
 ## Enable GitHub Pages
 
 After pushing this repository to GitHub:
@@ -51,7 +55,8 @@ There is no build step.
 7. Write the release notes.
 8. Attach the installer files for the supported platforms.
 9. Publish the release.
-10. Test the download button for macOS, Windows, Linux, and an unknown or mobile
+10. Update `version.json` with the published version.
+11. Test the download button for macOS, Windows, Linux, and an unknown or mobile
     platform.
 
 The `/releases/latest/download/<filename>` links resolve to assets from the latest

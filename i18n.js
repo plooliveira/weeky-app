@@ -179,6 +179,24 @@ const getDownloadConfiguration = (browser = globalThis.navigator ?? {}) => {
 const getValue = (language, key) =>
   key.split(".").reduce((value, segment) => value?.[segment], translations[language]);
 
+let currentVersion = "";
+
+const normalizeVersion = (value) => {
+  if (typeof value !== "string") return "";
+  const version = value.trim().replace(/^v/i, "");
+  return /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(version)
+    ? version
+    : "";
+};
+
+const getDownloadLabel = (language, option, version = currentVersion) => {
+  const label = getValue(language, option.labelKey);
+  const normalizedVersion = normalizeVersion(version);
+  return normalizedVersion && option.operatingSystem !== "unknown"
+    ? `${label} · ${normalizedVersion}`
+    : label;
+};
+
 const preferredLanguage = () => {
   const savedLanguage = localStorage.getItem("weeky-language");
   if (savedLanguage && translations[savedLanguage]) return savedLanguage;
@@ -192,7 +210,7 @@ const configureDownloads = (language) => {
     button.href = option.href;
   });
   document.querySelectorAll("[data-download-label]").forEach((label) => {
-    label.textContent = getValue(language, option.labelKey);
+    label.textContent = getDownloadLabel(language, option);
   });
 
   const linuxDownload = document.querySelector("[data-linux-download]");
@@ -204,6 +222,24 @@ const configureDownloads = (language) => {
   const linuxDownloadLabel = document.querySelector("[data-linux-download-label]");
   if (linuxDownloadLabel) {
     linuxDownloadLabel.textContent = getValue(language, "common.linuxPortableDownload");
+  }
+};
+
+const loadVersion = async () => {
+  if (window.location.protocol === "file:") return;
+
+  try {
+    const response = await fetch("./version.json", { cache: "no-cache" });
+    if (!response.ok) return;
+
+    const metadata = await response.json();
+    const version = normalizeVersion(metadata.version);
+    if (!version) return;
+
+    currentVersion = version;
+    configureDownloads(document.documentElement.lang);
+  } catch {
+    // The download links remain functional when version metadata is unavailable.
   }
 };
 
@@ -231,13 +267,16 @@ if (typeof document !== "undefined") {
   });
 
   setLanguage(preferredLanguage());
+  loadVersion();
 }
 
 if (typeof module !== "undefined") {
   module.exports = {
     detectOperatingSystem,
     downloadOptions,
+    getDownloadLabel,
     getDownloadConfiguration,
     latestReleaseUrl,
+    normalizeVersion,
   };
 }

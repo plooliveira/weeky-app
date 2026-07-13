@@ -183,8 +183,8 @@ let currentVersion = "";
 
 const normalizeVersion = (value) => {
   if (typeof value !== "string") return "";
-  const version = value.trim().replace(/^v/i, "");
-  return /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(version)
+  const version = value.trim();
+  return /^v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(version)
     ? version
     : "";
 };

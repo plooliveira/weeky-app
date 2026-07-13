@@ -79,7 +79,7 @@ test("shows the current version only on direct-download labels", () => {
   const unknown = getDownloadConfiguration({ userAgentData: { platform: "Android" } });
 
   assert.equal(getDownloadLabel("pt-BR", macOS, "0.1.2"), "Baixar para macOS · 0.1.2");
-  assert.equal(getDownloadLabel("en", macOS, "v0.1.2"), "Download for macOS · 0.1.2");
+  assert.equal(getDownloadLabel("en", macOS, "v0.1.2"), "Download for macOS · v0.1.2");
   assert.equal(getDownloadLabel("pt-BR", unknown, "0.1.2"), "Ver downloads");
 });
 

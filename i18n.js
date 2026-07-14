@@ -31,7 +31,7 @@ const translations = {
       featureTwoTitle: "Categorias que dão contexto",
       featureTwoDescription: "Diferencie trabalho, estudos, saúde, descanso e outras áreas importantes da sua vida.",
       featureThreeTitle: "Simples por intenção",
-      featureThreeDescription: "Uma interface tranquila, criada para manter seus planos, e não o aplicativo, no centro da atenção.",
+      featureThreeDescription: "Uma interface tranquila criada para manter seus planos, e não o aplicativo, no centro da atenção.",
       featureFourTitle: "Privado por padrão",
       featureFourDescription: "Seus dados de planejamento permanecem no seu dispositivo e sob seu controle.",
       printLabel: "DA TELA PARA O PAPEL",

@@ -531,15 +531,8 @@ h1 {
 }
 
 .section-heading {
-  display: grid;
-  grid-template-columns: 0.55fr 1.45fr;
-  gap: 40px;
-  align-items: start;
+  max-width: 720px;
   margin-bottom: 72px;
-}
-
-.section-heading .eyebrow {
-  margin-top: 10px;
 }
 
 .section-heading h2,
@@ -896,8 +889,6 @@ h1 {
   }
 
   .section-heading {
-    grid-template-columns: 1fr;
-    gap: 10px;
     margin-bottom: 48px;
   }
 
